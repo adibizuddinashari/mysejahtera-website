@@ -6,23 +6,24 @@
 <title>MyGrocer™ — Kedai Runcit Layan Diri Pertama di Malaysia · …senang aje!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <style>
   :root{
-    --yellow:#F5C500;--yellow-soft:#FFF6D1;--yellow-tint:#FFFBEB;
-    --purple:#3D2B9E;--purple-deep:#2A1D78;--purple-soft:#EFEBFF;
-    --ink:#1B1430;--muted:#6A6480;--line:#E8E4F0;--bg:#FFFDF7;--white:#FFFFFF;
+    --yellow:#FFDE17;--yellow-soft:#FFF8D0;--yellow-tint:#FFFCE8;
+    --purple:#863694;--purple-deep:#5E2668;--purple-soft:#F3EAF4;
+    --ink:#1B1430;--muted:#6A6480;--line:#E8E4F0;--bg:#FFFDF7;--white:#FFFFFF;--green:#1D7979;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+  h1,h2,h3,h4,h5,h6,.logo,.foot-logo{font-family:'BioRhyme',Georgia,serif}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none;background:none}
   .container{max-width:1240px;margin:0 auto;padding:0 24px}
-  .mono{font-family:'JetBrains Mono',monospace}
+  .mono{font-family:'Noto Sans',sans-serif}
   #home{scroll-margin-top:80px}
   nav.top{position:sticky;top:0;z-index:50;background:rgba(255,253,247,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .nav-inner{display:flex;align-items:center;gap:32px;height:72px}
@@ -40,9 +41,9 @@
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:700;font-size:14px;transition:transform .15s,box-shadow .15s}
   .btn:hover{transform:translateY(-1px)}
   .btn-primary{background:var(--purple);color:#fff}
-  .btn-primary:hover{background:var(--purple-deep);box-shadow:0 8px 24px -8px rgba(61,43,158,.5)}
+  .btn-primary:hover{background:var(--purple-deep);box-shadow:0 8px 24px -8px rgba(134,54,148,.5)}
   .btn-yellow{background:var(--yellow);color:var(--ink)}
-  .btn-yellow:hover{box-shadow:0 8px 24px -8px rgba(245,197,0,.6)}
+  .btn-yellow:hover{box-shadow:0 8px 24px -8px rgba(255,222,23,.6)}
   .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
   .btn-ghost:hover{background:var(--ink);color:#fff}
 
@@ -64,12 +65,12 @@
   .hero-sub{font-size:18px;line-height:1.55;color:var(--ink);opacity:.85;max-width:520px;margin:18px 0 28px}
   .hero-sub b{color:var(--purple)}
   .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-  .hero-marquee{margin-top:34px;display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--purple);font-weight:600}
+  .hero-marquee{margin-top:34px;display:flex;gap:24px;font-family:'Noto Sans',sans-serif;font-size:12px;color:var(--purple);font-weight:600}
   .hero-marquee span{display:inline-flex;align-items:center;gap:8px}
   .hero-marquee .dotm{width:6px;height:6px;background:var(--purple);border-radius:50%}
 
   .store-stage{position:relative;aspect-ratio:1/1;background:var(--purple);border-radius:32px;padding:28px;color:#fff;box-shadow:0 30px 60px -20px rgba(0,0,0,.25);overflow:hidden}
-  .store-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%, rgba(245,197,0,.25), transparent 40%),radial-gradient(circle at 20% 80%, rgba(245,197,0,.18), transparent 40%)}
+  .store-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%, rgba(255,222,23,.25), transparent 40%),radial-gradient(circle at 20% 80%, rgba(255,222,23,.18), transparent 40%)}
   .store-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
   .store-name{font-weight:800;font-size:14px;letter-spacing:.04em}
   .store-status{font-size:11px;font-weight:700;background:var(--yellow);color:var(--ink);padding:4px 10px;border-radius:999px;display:flex;align-items:center;gap:6px}
@@ -82,8 +83,8 @@
   .door .face-smile{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:18px;height:8px;border-bottom:2px solid var(--ink);border-radius:0 0 12px 12px}
   .door .shelf{position:absolute;left:8px;right:8px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
   .door .shelf div{height:34px;background:linear-gradient(180deg,var(--yellow-soft),#fff);border-radius:4px;border:1px solid var(--line)}
-  .door .shelf div:nth-child(2){background:linear-gradient(180deg,#E5DFFF,#fff)}
-  .door .shelf div:nth-child(4){background:linear-gradient(180deg,#E5DFFF,#fff)}
+  .door .shelf div:nth-child(2){background:linear-gradient(180deg,#EDD5F0,#fff)}
+  .door .shelf div:nth-child(4){background:linear-gradient(180deg,#EDD5F0,#fff)}
   .door-floor{position:absolute;left:8px;right:8px;bottom:0;height:8px;background:repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 14px)}
   .store-badge{position:absolute;z-index:3;background:#fff;color:var(--ink);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px -8px rgba(0,0,0,.3);font-size:13px;font-weight:700}
   .store-badge .ico{width:30px;height:30px;border-radius:8px;background:var(--yellow);display:grid;place-items:center}
@@ -93,7 +94,7 @@
 
   section{padding:80px 0;position:relative;scroll-margin-top:80px}
   section.tinted{background:var(--yellow-tint)}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--purple);letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
+  .eyebrow{font-family:'Noto Sans',sans-serif;font-size:12px;font-weight:600;color:var(--purple);letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
   .eyebrow::before{content:"";width:24px;height:2px;background:var(--yellow)}
   h2{font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.02em;font-weight:800;margin:14px 0 10px}
   .sec-lede{font-size:18px;color:var(--muted);max-width:640px;line-height:1.55}
@@ -103,18 +104,18 @@
   .stat-card{flex:1;min-width:140px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px}
   .stat-num{font-size:32px;font-weight:800;color:var(--purple);letter-spacing:-.02em}
   .stat-lbl{font-size:13px;color:var(--muted);font-weight:600;margin-top:4px}
-  .what-visual{aspect-ratio:1/1.05;background:repeating-linear-gradient(45deg,#FFF6D1 0 14px,#fff 14px 28px);border-radius:24px;position:relative;overflow:hidden;border:1.5px solid var(--line)}
+  .what-visual{aspect-ratio:1/1.05;background:repeating-linear-gradient(45deg,#FFF8D0 0 14px,#fff 14px 28px);border-radius:24px;position:relative;overflow:hidden;border:1.5px solid var(--line)}
   .what-card{position:absolute;background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:14px;box-shadow:6px 6px 0 var(--ink)}
   .wc1{top:24px;left:24px;width:55%}
   .wc2{bottom:24px;right:24px;width:60%}
   .wc-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700}
-  .wc-amt{font-family:'JetBrains Mono',monospace;color:var(--purple)}
-  .wc-items{margin-top:8px;display:grid;gap:4px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+  .wc-amt{font-family:'Noto Sans',sans-serif;color:var(--purple)}
+  .wc-items{margin-top:8px;display:grid;gap:4px;font-size:11px;color:var(--muted);font-family:'Noto Sans',sans-serif}
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;counter-reset:s}
   .step{background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:32px;position:relative;transition:transform .25s, box-shadow .25s, border-color .25s}
-  .step:hover{transform:translateY(-4px);box-shadow:0 24px 40px -20px rgba(61,43,158,.18);border-color:var(--purple)}
-  .step-num{counter-increment:s;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--purple);letter-spacing:.1em}
+  .step:hover{transform:translateY(-4px);box-shadow:0 24px 40px -20px rgba(134,54,148,.18);border-color:var(--purple)}
+  .step-num{counter-increment:s;font-family:'Noto Sans',sans-serif;font-size:13px;font-weight:700;color:var(--purple);letter-spacing:.1em}
   .step-num::before{content:"STEP 0" counter(s)}
   .step-icon{margin:20px 0 24px;width:88px;height:88px;border-radius:20px;background:var(--yellow-soft);display:grid;place-items:center;color:var(--purple)}
   .step h3{font-size:24px;margin:0;font-weight:800;letter-spacing:-.01em}
@@ -149,33 +150,21 @@
   .cat-ico{width:48px;height:48px;border-radius:12px;background:var(--yellow-soft);color:var(--purple);display:grid;place-items:center;transition:all .2s}
   .cat-name{font-size:16px;font-weight:800;letter-spacing:-.01em}
   .cat-alt{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
-  .cat-meta{margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);font-weight:600}
+  .cat-meta{margin-top:auto;font-family:'Noto Sans',sans-serif;font-size:11px;color:var(--muted);font-weight:600}
   .cat:hover .cat-meta{color:var(--ink)}
-  .more-note{text-align:center;margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
+  .more-note{text-align:center;margin-top:32px;font-family:'Noto Sans',sans-serif;font-size:13px;color:var(--muted)}
   .more-note b{color:var(--purple)}
 
   .loc-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:32px;margin-top:48px}
-  .map{aspect-ratio:1.4/1;background:#fff;border:1.5px solid var(--line);border-radius:24px;position:relative;overflow:hidden}
-  .map-grid{position:absolute;inset:0;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/40px 40px,var(--yellow-tint)}
-  .map-road{position:absolute;background:#fff;border:1px solid var(--line)}
-  .road-h{left:0;right:0;height:24px;top:46%}
-  .road-v{top:0;bottom:0;width:24px;left:38%}
-  .map-pin{position:absolute;left:38%;top:46%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:6px}
-  .map-pin .ping{width:48px;height:48px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);display:grid;place-items:center;animation:bob 2.2s ease-in-out infinite;position:relative}
-  .map-pin .ping::after{content:"";position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--ink)}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  .map-pin .lbl{background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;margin-top:14px;white-space:nowrap}
-  .map-tag{position:absolute;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted)}
-  .map-overlay{position:absolute;top:18px;left:18px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:700;display:flex;gap:10px;align-items:center}
-  .map-overlay .dotg{width:8px;height:8px;background:#22c55e;border-radius:50%}
+  .map{aspect-ratio:1.4/1;border:1.5px solid var(--line);border-radius:24px;overflow:hidden}
   .loc-card{background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column}
-  .loc-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--purple);font-weight:700;letter-spacing:.1em}
+  .loc-num{font-family:'Noto Sans',sans-serif;font-size:12px;color:var(--purple);font-weight:700;letter-spacing:.1em}
   .loc-title{font-size:24px;font-weight:800;margin:8px 0 4px;letter-spacing:-.01em}
   .loc-addr{color:var(--muted);font-size:14.5px;line-height:1.6}
   .loc-hours{margin-top:20px;padding:14px;background:var(--yellow-soft);border-radius:12px;font-size:13.5px;display:flex;justify-content:space-between;align-items:center}
   .loc-hours b{font-weight:800}
   .loc-tags{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-  .loc-tag{font-size:11px;padding:5px 10px;border-radius:999px;background:var(--purple-soft);color:var(--purple);font-weight:700;font-family:'JetBrains Mono',monospace}
+  .loc-tag{font-size:11px;padding:5px 10px;border-radius:999px;background:var(--purple-soft);color:var(--purple);font-weight:700;font-family:'Noto Sans',sans-serif}
   .loc-actions{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
   .notify-card{background:var(--yellow);border-radius:32px;padding:64px;position:relative;overflow:hidden}
@@ -194,8 +183,8 @@
   .notify-side{background:#fff;border:2px solid var(--ink);border-radius:24px;padding:28px;box-shadow:8px 8px 0 var(--ink)}
   .ns-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px dashed var(--line);font-size:13.5px;font-weight:600;gap:12px}
   .ns-row:last-child{border-bottom:none}
-  .ns-row .v{color:var(--purple);font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right}
-  .ns-head{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+  .ns-row .v{color:var(--purple);font-family:'Noto Sans',sans-serif;font-weight:700;text-align:right}
+  .ns-head{font-family:'Noto Sans',sans-serif;font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
   .ns-bignum{font-size:48px;font-weight:800;color:var(--purple);letter-spacing:-.03em;margin:8px 0}
 
   footer{background:var(--ink);color:#fff;padding:72px 0 32px}
@@ -445,7 +434,7 @@ function WhatIs(){
             </div>
           </div>
           <div className="what-card wc2">
-            <div className="wc-row"><span>TNG eWALLET</span><span className="wc-amt" style={{color:'#22c55e'}}>{t("BAYAR ✓","PAID ✓")}</span></div>
+            <div className="wc-row"><span>TNG eWALLET</span><span className="wc-amt" style={{color:'#1D7979'}}>{t("BAYAR ✓","PAID ✓")}</span></div>
             <div className="wc-items" style={{marginTop:10}}>
               <span>Ref: MYG-2026-00284</span>
               <span>{t("05:42 PTG · 18 saat","05:42 PM · 18 sec total")}</span>
@@ -575,18 +564,16 @@ function StoreLoc(){
         <p className="sec-lede" style={{marginTop:8}} data-anim="up" data-delay="2">{t("Kedai perintis kami akan dibuka pertengahan 2026. Daftar untuk dapatkan kemas kini dan jemputan soft-launch eksklusif.","Our pilot store opens in mid-2026. Sign up for updates and an exclusive soft-launch invite.")}</p>
         <div className="loc-grid">
           <div className="map" data-anim="left">
-            <div className="map-grid"></div>
-            <div className="map-road road-h"></div>
-            <div className="map-road road-v"></div>
-            <div className="map-tag" style={{top:20,right:20}}>Jln Bahagia 3/14</div>
-            <div className="map-tag" style={{bottom:20,left:20}}>{t("Surau Al-Iman","Al-Iman Mosque")}</div>
-            <div className="map-tag" style={{bottom:60,right:30}}>{t("SK Taman Bahagia","Taman Bahagia Primary")}</div>
-            <div className="map-tag" style={{top:'30%',left:'10%'}}>{t("Padang R&R","Community Field")}</div>
-            <div className="map-overlay"><span className="dotg"></span>{t("KEDAI #001 · AKAN DIBUKA","STORE #001 · OPENING SOON")}</div>
-            <div className="map-pin">
-              <div className="ping"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--ink)" strokeWidth="2.5"><path d="M3 21V10l4-3 4 3v11M11 21h10V13l-4-3-4 3"/></svg></div>
-              <div className="lbl">MYGROCER #001</div>
-            </div>
+            <iframe
+              src="https://maps.google.com/maps?q=Taman+Bahagia,+47301+Petaling+Jaya,+Selangor,+Malaysia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style={{border:0,display:'block',width:'100%',height:'100%'}}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="MyGrocer Taman Bahagia location"
+            />
           </div>
           <div className="loc-card" data-anim="right" data-delay="2">
             <span className="loc-num">{t("KEDAI #001 · PERINTIS","STORE #001 · PILOT")}</span>
@@ -669,7 +656,7 @@ function Notify(){
               <div className="ns-row"><span>{t("Pembukaan dirancang","Planned opening")}</span><span className="v">Q3 2026</span></div>
               <div className="ns-row"><span>{t("Lokasi pertama","First location")}</span><span className="v">PJ · TMN BAHAGIA</span></div>
               <div className="ns-row"><span>{t("Lokasi seterusnya","Next locations")}</span><span className="v">{t("5 KAWASAN","5 AREAS")}</span></div>
-              <div className="ns-row"><span>{t("Status pemilihan tapak","Site-selection status")}</span><span className="v" style={{color:'#22c55e'}}>{t("● ON-GOING","● ONGOING")}</span></div>
+              <div className="ns-row"><span>{t("Status pemilihan tapak","Site-selection status")}</span><span className="v" style={{color:'#1D7979'}}>{t("● ON-GOING","● ONGOING")}</span></div>
             </div>
           </div>
         </div>
