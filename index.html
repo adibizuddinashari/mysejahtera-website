@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MyGrocer™ — Kedai Runcit Layan Diri Pertama di Malaysia · …senang aje!</title>
+<title>MyGrocer™ · Kedai Runcit Layan Diri Pertama di Malaysia · …senang aje!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -450,8 +450,8 @@ function WhatIs(){
 function HowItWorks(){
   const t = useT();
   const STEPS = [
-    {h:t("Masuk","Enter"), alt:t("Enter","Masuk"), icon:<I.door/>, p:t("Face scan kat pintu masuk — selamat dan pantas. Daftar sekali sahaja, masuk seumur hidup.","Face-scan at the door — secure and instant. Register once, walk right in every time.")},
-    {h:t("Ambil","Pick"),  alt:t("Pick","Ambil"),  icon:<I.cart/>, p:t("Layan diri — pilih keperluan harian terus dari rak. Tiada juruwang, tiada beratur, tiada tekanan.","Help yourself — pick your daily essentials straight off the shelves. No cashier, no queue, no pressure.")},
+    {h:t("Masuk","Enter"), alt:t("Enter","Masuk"), icon:<I.door/>, p:t("Face scan kat pintu masuk · selamat dan pantas. Daftar sekali sahaja, masuk seumur hidup.","Face-scan at the door · secure and instant. Register once, walk right in every time.")},
+    {h:t("Ambil","Pick"),  alt:t("Pick","Ambil"),  icon:<I.cart/>, p:t("Layan diri · pilih keperluan harian terus dari rak. Tiada juruwang, tiada beratur, tiada tekanan.","Help yourself · pick your daily essentials straight off the shelves. No cashier, no queue, no pressure.")},
     {h:t("Check Out!","Check Out!"), alt:t("Pay & Done","Bayar & Habis"), icon:<I.checkout/>, p:t("Scan barang di kiosk dan bayar guna TnG, GrabPay, DuitNow atau MAE. Resit terus masuk ke telefon.","Scan your items at the kiosk and pay with TnG, GrabPay, DuitNow or MAE. Your receipt lands straight on your phone.")},
   ];
   return (
@@ -459,7 +459,7 @@ function HowItWorks(){
       <div className="container">
         <span className="eyebrow" data-anim="up">02 / {t("Macam mana ia berfungsi?","How it works")}</span>
         <h2 style={{maxWidth:760}} data-anim="up" data-delay="1">{t('Masuk · Ambil · Check Out!','Enter · Pick · Check Out!')}</h2>
-        <p className="sec-lede" style={{marginTop:8}} data-anim="up" data-delay="2">{t("Senang macam jalan ke kedai sebelah rumah — tanpa perlu cari duit kecil atau tunggu giliran.","As simple as walking to the corner shop — without hunting for spare change or waiting in line.")}</p>
+        <p className="sec-lede" style={{marginTop:8}} data-anim="up" data-delay="2">{t("Senang macam jalan ke kedai sebelah rumah · tanpa perlu cari duit kecil atau tunggu giliran.","As simple as walking to the corner shop · without hunting for spare change or waiting in line.")}</p>
         <div className="steps">
           {STEPS.map((s,i)=>(
             <div className="step" key={i} data-anim="tilt" data-delay={String(i+3)}>
@@ -481,10 +481,10 @@ function HowItWorks(){
 function Why(){
   const t = useT();
   const BENEFITS = [
-    {ico:<I.clock/>,     h:t("Buka 9 Pagi – 10 Malam","Open 9AM – 10PM Daily"), alt:t("Open 9AM – 10PM Daily","Buka 9 Pagi – 10 Malam"), p:t("Setiap hari, tanpa cuti. Beli bila perlu — pagi sebelum kerja atau malam selepas pulang.","Every day, no holidays. Drop in whenever — morning before work, or night after coming home.")},
+    {ico:<I.clock/>,     h:t("Buka 9 Pagi – 10 Malam","Open 9AM – 10PM Daily"), alt:t("Open 9AM – 10PM Daily","Buka 9 Pagi – 10 Malam"), p:t("Setiap hari, tanpa cuti. Beli bila perlu · pagi sebelum kerja atau malam selepas pulang.","Every day, no holidays. Drop in whenever · morning before work, or night after coming home.")},
     {ico:<I.eye/>,       h:t("Pintu Face Scan","Face Scan Entry"),               alt:t("Face Scan Entry","Pintu Automatik"),               p:t("Daftar sekali, masuk seumur hidup. Data muka anda disulitkan dan disimpan dengan selamat.","Register once, enter for life. Your face data is encrypted and stored safely.")},
     {ico:<I.phone/>,     h:t("100% Tanpa Tunai","100% Cashless"),                alt:"TnG · GrabPay · DuitNow · MAE",                       p:t("Semua e-wallet utama disokong. Tiada caj tersembunyi. Resit digital terus ke telefon.","All major e-wallets supported. No hidden charges. Digital receipts sent straight to your phone.")},
-    {ico:<I.community/>, h:t("Untuk Komuniti","Community-First"),                alt:t("Community-First","Untuk Komuniti"),                  p:t("Dibina untuk taman perumahan — bukan mall. Harga jujur, pilihan praktikal, jiran-mesra.","Built for residential neighbourhoods — not malls. Honest prices, practical choices, neighbour-friendly.")},
+    {ico:<I.community/>, h:t("Untuk Komuniti","Community-First"),                alt:t("Community-First","Untuk Komuniti"),                  p:t("Dibina untuk taman perumahan · bukan mall. Harga jujur, pilihan praktikal, jiran-mesra.","Built for residential neighbourhoods · not malls. Honest prices, practical choices, neighbour-friendly.")},
   ];
   return (
     <section>
@@ -624,7 +624,7 @@ function Notify(){
               <span className="eyebrow" style={{color:'var(--purple)'}} data-anim="up">06 / {t("Daftar minat","Register interest")}</span>
               <h2 data-anim="up" data-delay="1">{t("Kami akan buka tidak lama lagi!","We're opening soon!")}</h2>
               <p className="sec-lede" style={{maxWidth:520}}>
-                {t("Daftar email anda di bawah dan dapatkan jemputan VIP ke majlis pembukaan, plus baucar percuma RM10 untuk pembelian pertama.","Drop your email below for a VIP invite to the opening — plus a free RM10 voucher on your first visit.")}
+                {t("Daftar email anda di bawah dan dapatkan jemputan VIP ke majlis pembukaan, plus baucar percuma RM10 untuk pembelian pertama.","Drop your email below for a VIP invite to the opening · plus a free RM10 voucher on your first visit.")}
               </p>
               {submitted ? (
                 <div style={{marginTop:24,background:'#fff',border:'2px solid var(--ink)',borderRadius:14,padding:'16px 20px',display:'flex',alignItems:'center',gap:12,maxWidth:520}}>
@@ -678,7 +678,7 @@ function Footer(){
               <div className="foot-logo logo-foot">
                 <img src="assets/mygrocer-logo.png" alt="MyGrocer"/>
               </div>
-              <div className="foot-tag">{t("Masuk · Ambil · Check Out — …senang aje! Kedai runcit layan diri pertama di Malaysia. Buka 9 pagi – 10 malam.","Enter · Pick · Check Out — …it's that easy! Malaysia's first self-service grocery store. Open 9am – 10pm.")}</div>
+              <div className="foot-tag">{t("Masuk · Ambil · Check Out · …senang aje! Kedai runcit layan diri pertama di Malaysia. Buka 9 pagi – 10 malam.","Enter · Pick · Check Out · …it's that easy! Malaysia's first self-service grocery store. Open 9am – 10pm.")}</div>
               <div className="foot-social">
                 <a href="#"><I.fb/></a>
                 <a href="#"><I.ig/></a>
