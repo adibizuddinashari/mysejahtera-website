@@ -151,12 +151,9 @@
   .deal-track{display:flex;gap:12px;overflow-x:scroll;flex:1;scrollbar-width:none;scroll-behavior:auto}
   .deal-track::-webkit-scrollbar{display:none}
   .deal-card{flex:0 0 calc(25% - 9px);min-width:0;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.09);display:flex;flex-direction:column}
-  .deal-card-top{background:linear-gradient(160deg,#C2439A 0%,#7B1FA2 100%);padding:0 14px 14px;position:relative;overflow:hidden;text-align:center;min-height:136px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px}
+  .deal-card-top{background:linear-gradient(160deg,#C2439A 0%,#7B1FA2 100%);padding:24px 14px 20px;position:relative;overflow:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
   .deal-ribbon{position:absolute;top:15px;left:-5%;width:110%;height:9px;background:repeating-linear-gradient(90deg,#FFE000 0 14px,#FF3A3A 14px 28px,#00B050 28px 42px,#0070C0 42px 56px);transform:rotate(-1.5deg);opacity:.9}
-  .deal-logo{height:24px;display:flex;align-items:center;justify-content:center;margin-top:34px}
-  .deal-logo img{height:100%;width:auto;object-fit:contain;filter:brightness(0) invert(1)}
-  .deal-promo-label{font-family:'BioRhyme',Georgia,serif;font-size:13px;font-weight:800;color:#FFE000;line-height:1.15;text-shadow:0 1px 3px rgba(0,0,0,.5);letter-spacing:-.01em;text-transform:uppercase}
-  .deal-period-pill{background:#E91E8C;color:#fff;font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:999px;font-family:'Noto Sans',sans-serif;display:inline-block}
+  .deal-promo-label{font-family:'BioRhyme',Georgia,serif;font-size:15px;font-weight:800;color:#FFE000;line-height:1.2;text-shadow:0 1px 4px rgba(0,0,0,.5);letter-spacing:-.01em;text-transform:uppercase;margin-top:14px}
   .deal-card-body{display:flex;align-items:center;padding:14px 12px 10px;flex:1;gap:8px}
   .deal-img-wrap{flex:0 0 44%;height:96px;display:flex;align-items:center;justify-content:center}
   .deal-img{max-width:100%;max-height:96px;object-fit:contain}
@@ -573,11 +570,7 @@ function Products(){
               <div className="deal-card" key={i}>
                 <div className="deal-card-top">
                   <div className="deal-ribbon"></div>
-                  <div className="deal-logo">
-                    <img src="assets/mygrocer-logo.png" alt="MyGrocer"/>
-                  </div>
-                  <div className="deal-promo-label">{t("PROMOSI","PROMOTION")}<br/>{t("MYGROCER","MYGROCER")}</div>
-                  <div className="deal-period-pill">{t("TEMPOH","PERIOD")} {d.period}</div>
+                  <div className="deal-promo-label">{t("PROMOSI MYGROCER","MYGROCER PROMOTION")}</div>
                 </div>
                 <div className="deal-card-body">
                   <div className="deal-img-wrap">
@@ -590,7 +583,7 @@ function Products(){
                       <span className="deal-price-num">{d.sp}</span>
                     </div>
                     <div className="deal-price-each">/{t("SETIAP","EACH")}</div>
-                    <div className="deal-name">{d.name}</div>
+                    <div className="deal-name">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                   </div>
                 </div>
                 <div className="deal-disclaimer">{t("*Harga tertakluk perubahan tanpa notis. Sah selagi stok ada.","*Prices subject to change without prior notice. While stocks last.")}</div>
