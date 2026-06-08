@@ -7,9 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <style>
   :root{
@@ -164,13 +166,13 @@
   .more-note{text-align:center;margin-top:32px;font-family:'Noto Sans',sans-serif;font-size:13px;color:var(--muted)}
   .more-note b{color:var(--purple)}
 
-  .loc-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
-  .loc-tab-btn{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px 20px;text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s;display:flex;justify-content:space-between;align-items:center;gap:12px}
-  .loc-tab-btn.active{border-color:var(--purple);box-shadow:0 0 0 3px rgba(61,43,158,.12)}
-  .loc-tab-btn:hover:not(.active){border-color:var(--purple);background:var(--purple-soft)}
-  .ltb-name{font-weight:700;font-size:15px;flex:1}
-  .ltb-badge{font-family:'Noto Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:999px;background:var(--purple-soft);color:var(--purple);white-space:nowrap}
-  .ltb-badge.open{background:#dcfce7;color:#166534}
+  .loc-dropdown{position:relative;margin-top:32px}
+  .loc-select{width:100%;appearance:none;-webkit-appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 44px 14px 18px;font-size:15px;font-weight:700;font-family:inherit;color:var(--ink);cursor:pointer;transition:border-color .2s,box-shadow .2s;outline:none}
+  .loc-select:focus,.loc-select:hover{border-color:var(--purple);box-shadow:0 0 0 3px rgba(61,43,158,.10)}
+  .loc-select-arrow{position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--purple);font-size:18px;line-height:1}
+  .leaflet-container{border-radius:24px!important}
+  .leaflet-popup-content-wrapper{border-radius:12px!important;font-family:'Noto Sans',sans-serif;font-size:13px;font-weight:700}
+  .leaflet-popup-content{margin:10px 14px!important}
   .loc-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:32px;margin-top:20px}
   .map{aspect-ratio:1.4/1;border:1.5px solid var(--line);border-radius:24px;overflow:hidden}
   .loc-card{background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column}
@@ -222,7 +224,7 @@
 
   @media (max-width:980px){
     .nav-links{display:none}
-    .hero-grid,.what-grid,.notify-grid,.loc-grid,.loc-tabs{grid-template-columns:1fr;gap:16px}
+    .hero-grid,.what-grid,.notify-grid,.loc-grid{grid-template-columns:1fr;gap:16px}
     .steps,.why-grid,.cats,.foot-grid{grid-template-columns:repeat(2,1fr)}
     .step .arrow{display:none}
     .notify-card{padding:36px 24px}
@@ -572,58 +574,92 @@ function Products(){
 function StoreLoc(){
   const t = useT();
   const [active, setActive] = React.useState(0);
+  const mapRef = React.useRef(null);
+  const leafletMap = React.useRef(null);
+  const markersRef = React.useRef([]);
+  const didMount = React.useRef(false);
+
   const STORES = [
     {
       num: t("KEDAI #001 · BUKA SEKARANG","STORE #001 · OPEN NOW"),
       name: "MyGrocer Taman Sri Sentosa",
       addr: ["C-G-8, Block C Pangsapuri Kos Rendah AC4,","Jalan Taman Sri Sentosa,","Taman Sri Sentosa, 58000 Kuala Lumpur."],
+      lat: 3.0863, lng: 101.6724,
       hours: t("Buka harian","Open daily"),
       hoursVal: "9:00 AM – 10:00 PM",
       tags: ["FACE SCAN","e-WALLET","FREE PARKING","SURAU 2 MIN"],
-      map: "https://maps.google.com/maps?q=Taman+Sri+Sentosa,+58000+Kuala+Lumpur,+Malaysia&t=&z=16&ie=UTF8&iwloc=&output=embed",
       open: true,
     },
     {
       num: t("KEDAI #002 · AKAN DATANG","STORE #002 · COMING SOON"),
       name: "MyGrocer Taman Medan",
       addr: ["D-G-16, Apartmen Medan Jaya,","Jalan PJS 2/1, Taman Dato Harun,","46000 Petaling Jaya, Selangor."],
-      hours: null,
-      hoursVal: null,
-      tags: [],
-      map: "https://maps.google.com/maps?q=Taman+Dato+Harun,+46000+Petaling+Jaya,+Selangor&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      lat: 3.0802, lng: 101.6273,
+      hours: null, hoursVal: null, tags: [],
       open: false,
     },
   ];
+
+  function makeIcon(idx, isActive){
+    const store = STORES[idx];
+    const size = isActive ? 38 : store.open ? 30 : 26;
+    const bg = store.open ? '#863694' : '#aaa';
+    const border = isActive ? '3px solid #FFDE17' : '2px solid #fff';
+    return L.divIcon({
+      html: '<div style="width:'+size+'px;height:'+size+'px;background:'+bg+';border:'+border+';border-radius:50%;box-shadow:0 3px 10px rgba(0,0,0,.35)"></div>',
+      className: '',
+      iconSize: [size, size],
+      iconAnchor: [size/2, size/2],
+    });
+  }
+
+  React.useEffect(() => {
+    if (leafletMap.current || !mapRef.current) return;
+    const map = L.map(mapRef.current, {zoomControl:true, scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(map);
+    STORES.forEach((store, i) => {
+      const marker = L.marker([store.lat, store.lng], {icon: makeIcon(i, i===0)})
+        .addTo(map)
+        .bindPopup('<b>'+store.name+'</b>');
+      marker.on('click', () => setActive(i));
+      markersRef.current.push(marker);
+    });
+    const group = L.featureGroup(markersRef.current);
+    map.fitBounds(group.getBounds().pad(0.5));
+    markersRef.current[0]?.openPopup();
+    leafletMap.current = map;
+  }, []);
+
+  React.useEffect(() => {
+    if (!didMount.current) { didMount.current = true; return; }
+    if (!leafletMap.current) return;
+    const store = STORES[active];
+    leafletMap.current.flyTo([store.lat, store.lng], 15, {duration:0.8});
+    markersRef.current.forEach((m, i) => m.setIcon(makeIcon(i, i===active)));
+    setTimeout(() => markersRef.current[active]?.openPopup(), 850);
+  }, [active]);
+
   const s = STORES[active];
   return (
     <section id="contact">
       <div className="container">
         <span className="eyebrow" data-anim="up">05 / {t("Kedai kami","Our stores")}</span>
         <h2 data-anim="up" data-delay="1">{t("Jumpa kami di sini.","Find us here.")}</h2>
-        <div className="loc-tabs" data-anim="up" data-delay="2">
-          {STORES.map((store, i) => (
-            <button key={i} className={"loc-tab-btn" + (active===i ? " active" : "")} onClick={()=>setActive(i)}>
-              <span className="ltb-name">{store.name.replace("MyGrocer ","")}</span>
-              <span className={"ltb-badge" + (store.open ? " open" : "")}>{store.open ? t("BUKA","OPEN") : t("AKAN DATANG","COMING SOON")}</span>
-            </button>
-          ))}
-        </div>
         <div className="loc-grid">
-          <div className="map" data-anim="left">
-            <iframe
-              key={active}
-              src={s.map}
-              width="100%"
-              height="100%"
-              style={{border:0,display:'block',width:'100%',height:'100%'}}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={s.name + " location"}
-            />
-          </div>
+          <div className="map" data-anim="left" ref={mapRef}></div>
           <div className="loc-card" data-anim="right" data-delay="2">
-            <span className="loc-num">{s.num}</span>
+            <div className="loc-dropdown">
+              <select className="loc-select" value={active} onChange={e=>setActive(+e.target.value)}>
+                {STORES.map((store, i) => (
+                  <option key={i} value={i}>{store.name}</option>
+                ))}
+              </select>
+              <span className="loc-select-arrow">&#9660;</span>
+            </div>
+            <span className="loc-num" style={{marginTop:16}}>{s.num}</span>
             <div className="loc-title">{s.name}</div>
             <div className="loc-addr">
               {s.addr[0]}<br/>{s.addr[1]}<br/>{s.addr[2]}
