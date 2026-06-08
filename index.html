@@ -164,7 +164,14 @@
   .more-note{text-align:center;margin-top:32px;font-family:'Noto Sans',sans-serif;font-size:13px;color:var(--muted)}
   .more-note b{color:var(--purple)}
 
-  .loc-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:32px;margin-top:48px}
+  .loc-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
+  .loc-tab-btn{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px 20px;text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .loc-tab-btn.active{border-color:var(--purple);box-shadow:0 0 0 3px rgba(61,43,158,.12)}
+  .loc-tab-btn:hover:not(.active){border-color:var(--purple);background:var(--purple-soft)}
+  .ltb-name{font-weight:700;font-size:15px;flex:1}
+  .ltb-badge{font-family:'Noto Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:999px;background:var(--purple-soft);color:var(--purple);white-space:nowrap}
+  .ltb-badge.open{background:#dcfce7;color:#166534}
+  .loc-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:32px;margin-top:20px}
   .map{aspect-ratio:1.4/1;border:1.5px solid var(--line);border-radius:24px;overflow:hidden}
   .loc-card{background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column}
   .loc-num{font-family:'Noto Sans',sans-serif;font-size:12px;color:var(--purple);font-weight:700;letter-spacing:.1em}
@@ -172,6 +179,7 @@
   .loc-addr{color:var(--muted);font-size:14.5px;line-height:1.6}
   .loc-hours{margin-top:20px;padding:14px;background:var(--yellow-soft);border-radius:12px;font-size:13.5px;display:flex;justify-content:space-between;align-items:center}
   .loc-hours b{font-weight:800}
+  .loc-soon{margin-top:20px;padding:14px;background:var(--yellow-soft);border-radius:12px;font-size:13.5px;color:var(--muted);line-height:1.5}
   .loc-tags{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
   .loc-tag{font-size:11px;padding:5px 10px;border-radius:999px;background:var(--purple-soft);color:var(--purple);font-weight:700;font-family:'Noto Sans',sans-serif}
   .loc-actions{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -214,7 +222,7 @@
 
   @media (max-width:980px){
     .nav-links{display:none}
-    .hero-grid,.what-grid,.notify-grid,.loc-grid{grid-template-columns:1fr;gap:32px}
+    .hero-grid,.what-grid,.notify-grid,.loc-grid,.loc-tabs{grid-template-columns:1fr;gap:16px}
     .steps,.why-grid,.cats,.foot-grid{grid-template-columns:repeat(2,1fr)}
     .step .arrow{display:none}
     .notify-card{padding:36px 24px}
@@ -563,43 +571,78 @@ function Products(){
 /* ============ STORE LOCATOR ============ */
 function StoreLoc(){
   const t = useT();
+  const [active, setActive] = React.useState(0);
+  const STORES = [
+    {
+      num: t("KEDAI #001 · BUKA SEKARANG","STORE #001 · OPEN NOW"),
+      name: "MyGrocer Taman Sri Sentosa",
+      addr: ["C-G-8, Block C Pangsapuri Kos Rendah AC4,","Jalan Taman Sri Sentosa,","Taman Sri Sentosa, 58000 Kuala Lumpur."],
+      hours: t("Buka harian","Open daily"),
+      hoursVal: "9:00 AM – 10:00 PM",
+      tags: ["FACE SCAN","e-WALLET","FREE PARKING","SURAU 2 MIN"],
+      map: "https://maps.google.com/maps?q=Taman+Sri+Sentosa,+58000+Kuala+Lumpur,+Malaysia&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      open: true,
+    },
+    {
+      num: t("KEDAI #002 · AKAN DATANG","STORE #002 · COMING SOON"),
+      name: "MyGrocer Taman Medan",
+      addr: ["D-G-16, Apartmen Medan Jaya,","Jalan PJS 2/1, Taman Dato Harun,","46000 Petaling Jaya, Selangor."],
+      hours: null,
+      hoursVal: null,
+      tags: [],
+      map: "https://maps.google.com/maps?q=Taman+Dato+Harun,+46000+Petaling+Jaya,+Selangor&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      open: false,
+    },
+  ];
+  const s = STORES[active];
   return (
     <section id="contact">
       <div className="container">
-        <span className="eyebrow" data-anim="up">05 / {t("Kedai pertama kami","Our first store")}</span>
-        <h2 style={{maxWidth:680}} data-anim="up" data-delay="1">{t("Buka tidak lama lagi di Taman Bahagia, Petaling Jaya.","Opening soon at Taman Bahagia, Petaling Jaya.")}</h2>
-        <p className="sec-lede" style={{marginTop:8}} data-anim="up" data-delay="2">{t("Kedai perintis kami akan dibuka pertengahan 2026. Daftar untuk dapatkan kemas kini dan jemputan soft-launch eksklusif.","Our pilot store opens in mid-2026. Sign up for updates and an exclusive soft-launch invite.")}</p>
+        <span className="eyebrow" data-anim="up">05 / {t("Kedai kami","Our stores")}</span>
+        <h2 data-anim="up" data-delay="1">{t("Jumpa kami di sini.","Find us here.")}</h2>
+        <div className="loc-tabs" data-anim="up" data-delay="2">
+          {STORES.map((store, i) => (
+            <button key={i} className={"loc-tab-btn" + (active===i ? " active" : "")} onClick={()=>setActive(i)}>
+              <span className="ltb-name">{store.name.replace("MyGrocer ","")}</span>
+              <span className={"ltb-badge" + (store.open ? " open" : "")}>{store.open ? t("BUKA","OPEN") : t("AKAN DATANG","COMING SOON")}</span>
+            </button>
+          ))}
+        </div>
         <div className="loc-grid">
           <div className="map" data-anim="left">
             <iframe
-              src="https://maps.google.com/maps?q=Taman+Bahagia,+47301+Petaling+Jaya,+Selangor,+Malaysia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              key={active}
+              src={s.map}
               width="100%"
               height="100%"
               style={{border:0,display:'block',width:'100%',height:'100%'}}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="MyGrocer Taman Bahagia location"
+              title={s.name + " location"}
             />
           </div>
           <div className="loc-card" data-anim="right" data-delay="2">
-            <span className="loc-num">{t("KEDAI #001 · PERINTIS","STORE #001 · PILOT")}</span>
-            <div className="loc-title">MyGrocer Taman Bahagia</div>
+            <span className="loc-num">{s.num}</span>
+            <div className="loc-title">{s.name}</div>
             <div className="loc-addr">
-              No. 28, Jalan Bahagia 3/14<br/>
-              Taman Bahagia, 47301<br/>
-              Petaling Jaya, Selangor.
+              {s.addr[0]}<br/>{s.addr[1]}<br/>{s.addr[2]}
             </div>
-            <div className="loc-hours">
-              <span><b>{t("Buka harian","Open daily")}</b></span>
-              <span className="mono"><b>9:00 AM – 10:00 PM</b></span>
-            </div>
-            <div className="loc-tags">
-              <span className="loc-tag">{t("FACE SCAN","FACE SCAN")}</span>
-              <span className="loc-tag">e-WALLET</span>
-              <span className="loc-tag">{t("PARKING FREE","FREE PARKING")}</span>
-              <span className="loc-tag">{t("SURAU 2 MIN","MOSQUE 2 MIN")}</span>
-            </div>
+            {s.hours ? (
+              <div className="loc-hours">
+                <span><b>{s.hours}</b></span>
+                <span className="mono"><b>{s.hoursVal}</b></span>
+              </div>
+            ) : (
+              <div className="loc-soon">
+                {t("Kedai ini akan dibuka tidak lama lagi. Nantikan!","This store is opening soon. Stay tuned!")}
+              </div>
+            )}
+            {s.tags.length > 0 && (
+              <div className="loc-tags">
+                {s.tags.map(tag => <span key={tag} className="loc-tag">{tag}</span>)}
+              </div>
+            )}
             <div className="loc-actions">
               <button className="btn btn-primary" style={{justifyContent:'center'}}><I.pin/> {t("Buka di Waze","Open in Waze")}</button>
               <button className="btn btn-yellow" style={{justifyContent:'center'}}><I.pin/> Google Maps</button>
