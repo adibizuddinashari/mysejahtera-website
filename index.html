@@ -72,11 +72,10 @@
   .hero-marquee .dotm{width:6px;height:6px;background:var(--purple);border-radius:50%}
 
   .store-stage{position:relative;aspect-ratio:1/1;background:var(--purple);border-radius:32px;padding:28px;color:#fff;box-shadow:0 30px 60px -20px rgba(0,0,0,.25);overflow:hidden}
-  .store-stage::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.5) 100%);z-index:1}
-  .store-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-  .store-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
-  .store-name{font-weight:800;font-size:14px;letter-spacing:.04em}
-  .store-status{font-size:11px;font-weight:700;background:var(--yellow);color:var(--ink);padding:4px 10px;border-radius:999px;display:flex;align-items:center;gap:6px}
+  .store-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .65s cubic-bezier(.25,.46,.45,.94)}
+  .store-stage:hover .store-img{transform:scale(1.06)}
+  .store-stage::after{content:"";position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.48) 0%,transparent 100%);z-index:1;pointer-events:none}
+  .store-location{position:absolute;bottom:22px;left:22px;z-index:2;color:#fff;font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1}
   .door{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:62%;aspect-ratio:.78;background:#fff;border-radius:24px 24px 4px 4px;box-shadow:0 30px 60px -20px rgba(0,0,0,.4);overflow:hidden;border:6px solid var(--ink)}
   .door .face-ring{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:64px;height:64px;border-radius:50%;border:3px dashed var(--purple);display:grid;place-items:center;animation:scan 2.4s ease-in-out infinite}
   @keyframes scan{0%,100%{transform:translateX(-50%) rotate(0)}50%{transform:translateX(-50%) rotate(180deg)}}
@@ -89,11 +88,6 @@
   .door .shelf div:nth-child(2){background:linear-gradient(180deg,#EDD5F0,#fff)}
   .door .shelf div:nth-child(4){background:linear-gradient(180deg,#EDD5F0,#fff)}
   .door-floor{position:absolute;left:8px;right:8px;bottom:0;height:8px;background:repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 14px)}
-  .store-badge{position:absolute;z-index:3;background:#fff;color:var(--ink);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px -8px rgba(0,0,0,.3);font-size:13px;font-weight:700}
-  .store-badge .ico{width:30px;height:30px;border-radius:8px;background:var(--yellow);display:grid;place-items:center}
-  .badge-tl{top:80px;left:-12px;animation:float 3.6s ease-in-out infinite}
-  .badge-br{bottom:60px;right:-8px;animation:float 3.6s ease-in-out -1.8s infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
   section{padding:80px 0;position:relative;scroll-margin-top:80px}
   section.tinted{background:var(--yellow-tint)}
@@ -397,25 +391,8 @@ function Hero(){
         </div>
 
         <div className="store-stage">
-          <div className="store-top">
-            <div className="store-name">MYGROCER · TAMAN BAHAGIA</div>
-            <div className="store-status"><span style={{width:6,height:6,background:'var(--ink)',borderRadius:'50%'}}></span>{t("BUKA 9 PAGI–10 MLM","OPEN 9AM–10PM")}</div>
-          </div>
-          <img src="images/Front Shop .jpg" className="store-img" alt="MyGrocer store front"/>
-          <div className="store-badge badge-tl">
-            <span className="ico"><I.face style={{width:18,height:18}}/></span>
-            <div>
-              <div>{t("Pintu Face Scan","Face Scan Entry")}</div>
-              <div style={{fontSize:11,color:'var(--muted)',fontWeight:600}}>{t("Pintu automatik","Automatic door")}</div>
-            </div>
-          </div>
-          <div className="store-badge badge-br">
-            <span className="ico"><I.pay style={{width:18,height:18}}/></span>
-            <div>
-              <div>{t("e-Wallet Sahaja","e-Wallet Only")}</div>
-              <div style={{fontSize:11,color:'var(--muted)',fontWeight:600}}>TnG · GrabPay · DuitNow</div>
-            </div>
-          </div>
+          <img src="images/MyGrocer Store Front.jpg" className="store-img" alt="MyGrocer store front"/>
+          <div className="store-location">MyGrocer · Taman Bahagia</div>
         </div>
       </div>
     </section>
