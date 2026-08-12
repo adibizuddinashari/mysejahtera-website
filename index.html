@@ -598,7 +598,7 @@ function StoreLoc(){
     {
       num: t("KEDAI #002 · AKAN DATANG","STORE #002 · COMING SOON"),
       name: "MyGrocer Taman Medan",
-      addr: ["D-G-16, Apartmen Medan Jaya,","Jalan PJS 2/1, Taman Dato Harun,","46000 Petaling Jaya, Selangor."],
+      addr: ["D-G-16, Apartment Medan Jaya,","Jalan PJS 2/1, Taman Dato Harun,","46000 Petaling Jaya, Selangor."],
       lat: 3.0802, lng: 101.6273,
       hours: null, hoursVal: null, tags: [],
       open: false,
@@ -685,8 +685,8 @@ function StoreLoc(){
               </div>
             )}
             <div className="loc-actions">
-              <button className="btn btn-primary" style={{justifyContent:'center'}}><I.waze/> Waze</button>
-              <button className="btn btn-yellow" style={{justifyContent:'center'}}><I.gmaps/> Google Maps</button>
+              <a href={`https://waze.com/ul?ll=${s.lat},${s.lng}&navigate=yes`} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{justifyContent:'center'}}><I.waze/> Waze</a>
+              <a href={`https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}`} target="_blank" rel="noopener noreferrer" className="btn btn-yellow" style={{justifyContent:'center'}}><I.gmaps/> Google Maps</a>
             </div>
           </div>
         </div>
